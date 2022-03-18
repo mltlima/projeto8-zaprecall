@@ -45,7 +45,7 @@ export default function FlashcardPage() {
                 <p>ZapRecall</p>
             </header>
             <ul class="questions">
-                {cardsArray.map(card => <Flashcard question={card.question} answer={card.answer}/>)}
+                {cardsArray.map((card, index) => <Flashcard question={card.question} answer={card.answer} index={index}/>)}
             </ul>
         </div>
     );
