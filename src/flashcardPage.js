@@ -3,41 +3,41 @@ import Flashcard from "./flashcard";
 
 const cardsArray = [
     {
-      quastion: "O que é JSX?",
+      question: "O que é JSX?",
       answer: "Uma extensão de linguagem do JavaScript"
     },
     {
-      quastion: " O React é __",
+      question: " O React é __",
       answer: "uma biblioteca JavaScript para construção de interfaces"
     },
     {
-      quastion: "Componentes devem iniciar com __",
+      question: "Componentes devem iniciar com __",
       answer: "letra maiúscula"
     },
     {
-      quastion: "Podemos colocar __ dentro do JSX",
+      question: "Podemos colocar __ dentro do JSX",
       answer: "expressões"
     },
     {
-      quastion: "O ReactDOM nos ajuda __",
+      question: "O ReactDOM nos ajuda __",
       answer: "interagindo com a DOM para colocar componentes React na mesma"
     },
     {
-      quastion: "Usamos o npm para __",
+      question: "Usamos o npm para __",
       answer: "gerenciar os pacotes necessários e suas dependências"
     },
     {
-      quastion: "Usamos props para __",
+      question: "Usamos props para __",
       answer: "passar diferentes informações para componentes "
     },
     {
-      quastion: "Usamos estado (state) para __",
+      question: "Usamos estado (state) para __",
       answer: "dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"
     }
   ];
 
 export default function FlashcardPage() {
-    
+    shuffleCards();
     return (
         <div class="flashcard-page">
             <header>
@@ -45,11 +45,19 @@ export default function FlashcardPage() {
                 <p>ZapRecall</p>
             </header>
             <ul class="questions">
-                <Flashcard/>
-                <Flashcard/>
-                <Flashcard/>
-                <Flashcard/>
+                {cardsArray.map(card => <Flashcard question={card.question} answer={card.answer}/>)}
             </ul>
         </div>
     );
+}
+
+function shuffleCards() {
+  const length = cardsArray.length;
+  for (let i = length; i > 0; i--) {
+    const randomIndex = Math.floor(Math.random() * i);
+    const currentIndex = i - 1;
+    const temp = cardsArray[currentIndex];
+    cardsArray[currentIndex] = cardsArray[randomIndex];
+    cardsArray[randomIndex] = temp;
+  }
 }
