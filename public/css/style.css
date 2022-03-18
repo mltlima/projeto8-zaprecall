@@ -43,3 +43,33 @@
     text-align: center;
     color: #D70900;
 }
+
+.flashcard-page {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    background-color: #FB6B6B;
+}
+
+.flashcard-page header {
+    display: flex;
+    margin-top: 22px;
+    margin-bottom: 40px;
+}
+
+.flashcard-page header p {
+    font-family: 'Righteous';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 25px;
+    letter-spacing: -0.012em;
+    color: #FFFFFF;
+}
+
+.flashcard-page header img {
+    width: 26px;
+    height: 30px;
+    margin-right: 10px;
+}
