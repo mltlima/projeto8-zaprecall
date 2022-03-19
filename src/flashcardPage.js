@@ -47,6 +47,9 @@ export default function FlashcardPage() {
             <ul class="questions">
                 {cardsArray.map((card, index) => <Flashcard question={card.question} answer={card.answer} index={index}/>)}
             </ul>
+            <footer>
+              
+            </footer>
         </div>
     );
 }
