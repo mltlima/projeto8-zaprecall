@@ -1,5 +1,6 @@
 import React from "react";
 import Flashcard from "./flashcard";
+import ColorCase from "./flashcard"
 
 const cardsArray = [
     {
@@ -37,6 +38,8 @@ const cardsArray = [
   ];
 
 export default function FlashcardPage() {
+    const [colorArr, setColorArr] = React.useState([]);
+    const [counter, setCounter] = React.useState(0);
     shuffleCards();
     return (
         <div class="flashcard-page">
@@ -45,10 +48,13 @@ export default function FlashcardPage() {
                 <p>ZapRecall</p>
             </header>
             <ul class="questions">
-                {cardsArray.map((card, index) => <Flashcard question={card.question} answer={card.answer} index={index}/>)}
+                {cardsArray.map((card, index) => 
+                <Flashcard question={card.question} answer={card.answer} index={index} addColorArr={setColorArr} colorArr={colorArr} counter={counter} updateCounter={setCounter}/>
+                )}
             </ul>
             <footer>
-              
+              <p>{counter}/{cardsArray.length} CONCLUÍDOS</p>
+              {colorArr.map((color) => <ColorCase2 color={color}/>)}
             </footer>
         </div>
     );
@@ -62,5 +68,18 @@ function shuffleCards() {
     const temp = cardsArray[currentIndex];
     cardsArray[currentIndex] = cardsArray[randomIndex];
     cardsArray[randomIndex] = temp;
+  }
+}
+
+function ColorCase2(props) {
+  const {color} = props;
+
+  switch (color) {
+      case "green":
+          return <ion-icon name="checkmark-circle"></ion-icon>;
+      case "yellow":
+          return <ion-icon name="help-circle"></ion-icon>;
+      case "red":
+          return <ion-icon name="close-circle"></ion-icon>
   }
 }
