@@ -1,6 +1,5 @@
 import React from "react";
 import Flashcard from "./flashcard";
-import ColorCase from "./flashcard"
 
 const cardsArray = [
     {
@@ -40,6 +39,7 @@ const cardsArray = [
 export default function FlashcardPage() {
     const [colorArr, setColorArr] = React.useState([]);
     const [counter, setCounter] = React.useState(0);
+    //let flawless = 0;
     shuffleCards();
     return (
         <div class="flashcard-page">
@@ -55,8 +55,10 @@ export default function FlashcardPage() {
             <footer>
               <p>{counter}/{cardsArray.length} CONCLUÍDOS</p>
               {counter !== cardsArray.length ? null : 
-              <FinalResults flawless={cardsArray.includes("red") ? false : true} counter={counter} length={cardsArray.length}/>}
-              {colorArr.map((color) => <ColorCase2 color={color}/>)}
+              <FinalResults flawless={colorArr.includes("red") ? false : true}/>}
+              <div className="colors">
+                {colorArr.map((color) => <ColorCase2 color={color}/>)}
+              </div>
             </footer>
         </div>
     );
@@ -74,16 +76,16 @@ function shuffleCards() {
 }
 
 function FinalResults(props) {
-  const {counter, length, flawless} = props;
-
+  const {flawless} = props;
+  console.log(flawless)
   return flawless ? (
     <>
-      <p>🥳 Parabéns!</p>
+      <p className="result">🥳 Parabéns!</p>
       <p>Você não esqueceu de nenhum flashcard!</p>
     </>
   ) : (
     <>
-      <p>😥 Putz...</p>
+      <p className="result">😥 Putz...</p>
       <p>Ainda faltam alguns...
         Mas não desanime!</p>
     </>
@@ -97,10 +99,10 @@ function ColorCase2(props) {
 
   switch (color) {
       case "green":
-          return <ion-icon name="checkmark-circle"></ion-icon>;
+          return <div className="green"> <ion-icon name="checkmark-circle"></ion-icon> </div>;
       case "yellow":
-          return <ion-icon name="help-circle"></ion-icon>;
+          return <div className="yellow"> <ion-icon name="help-circle"></ion-icon> </div>;
       case "red":
-          return <ion-icon name="close-circle"></ion-icon>
+          return <div className="red"> <ion-icon name="close-circle"></ion-icon> </div>;
   }
 }

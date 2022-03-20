@@ -5,15 +5,16 @@ import "./css/reset.css";
 export default function Flashcard(props) {
     const [hideCard, setHideCard] = React.useState(true);
     const [childData, setChildData] = React.useState("");
+    const [notAnswered, setNotAnswered] = React.useState(true);
     const {index, answer, question, counter, updateCounter, addColorArr, colorArr} = props;
-    //TODO usestate lista para armazenar indexes e suas cores
+    
     return hideCard ? (
-        <ul className="cards" onClick={() => setHideCard(false)}>
+        <ul className="cards" onClick={() => notAnswered ? setHideCard(false) : null}>
             <Question index={index} childData={childData}/>
         </ul>
     ) : (
         <ul className="cards">
-            <Card answer={answer} question={question} dataToPass={setChildData} setHideCard={setHideCard} counter={counter} updateCounter={updateCounter} addColorArr={addColorArr} colorArr={colorArr}/>
+            <Card answer={answer} question={question} dataToPass={setChildData} setHideCard={setHideCard} counter={counter} updateCounter={updateCounter} addColorArr={addColorArr} colorArr={colorArr} notAnswered={setNotAnswered}/>
         </ul>
     )
 }
@@ -32,7 +33,7 @@ function Question(props) {
 }
 
 function Card(props) {
-    const {question, answer, dataToPass, setHideCard, counter, updateCounter, addColorArr, colorArr} = props;
+    const {question, answer, dataToPass, setHideCard, counter, updateCounter, addColorArr, colorArr, notAnswered} = props;
     const [showQuestion, setShowQuestion] = React.useState(true);
     const [hideAnswer, setHideAnswer] = React.useState(false);
 
@@ -47,25 +48,31 @@ function Card(props) {
             <div className={hideAnswer ? "hide" : "card-answer"}>
                 <p>{answer}</p>
                 <div className="buttons">
+
                     <button className="nao-lembrei" onClick={() => {
-                        //setHideAnswer(true);
                         dataToPass("red");
                         addColorArr([...colorArr,"red"]);
                         setHideCard(true);
+                        notAnswered(false);
                         updateCounter(counter + 1);
                     }}>Não lembrei</button>
+
                     <button className="quase-nao-lembrei" onClick={() => {
                         dataToPass("yellow");
                         addColorArr([...colorArr,"yellow"]);
                         setHideCard(true);
+                        notAnswered(false);
                         updateCounter(counter + 1);
                     }}>Quase não lembrei</button>
+
                     <button className="zap" onClick={() => {
                         dataToPass("green");
                         addColorArr([...colorArr,"green"]);
                         setHideCard(true);
+                        notAnswered(false);
                         updateCounter(counter + 1);
                     }}>Zap!</button>
+
                 </div>
             </div>
             }
