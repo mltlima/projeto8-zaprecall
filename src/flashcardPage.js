@@ -54,6 +54,8 @@ export default function FlashcardPage() {
             </ul>
             <footer>
               <p>{counter}/{cardsArray.length} CONCLUÍDOS</p>
+              {counter !== cardsArray.length ? null : 
+              <FinalResults flawless={cardsArray.includes("red") ? false : true} counter={counter} length={cardsArray.length}/>}
               {colorArr.map((color) => <ColorCase2 color={color}/>)}
             </footer>
         </div>
@@ -69,6 +71,25 @@ function shuffleCards() {
     cardsArray[currentIndex] = cardsArray[randomIndex];
     cardsArray[randomIndex] = temp;
   }
+}
+
+function FinalResults(props) {
+  const {counter, length, flawless} = props;
+
+  return flawless ? (
+    <>
+      <p>🥳 Parabéns!</p>
+      <p>Você não esqueceu de nenhum flashcard!</p>
+    </>
+  ) : (
+    <>
+      <p>😥 Putz...</p>
+      <p>Ainda faltam alguns...
+        Mas não desanime!</p>
+    </>
+
+  )
+  
 }
 
 function ColorCase2(props) {
