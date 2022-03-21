@@ -39,8 +39,8 @@ const cardsArray = [
 export default function FlashcardPage() {
     const [colorArr, setColorArr] = React.useState([]);
     const [counter, setCounter] = React.useState(0);
-    //let flawless = 0;
     shuffleCards();
+
     return (
         <div class="flashcard-page">
             <header>
@@ -77,7 +77,7 @@ function shuffleCards() {
 
 function FinalResults(props) {
   const {flawless} = props;
-  console.log(flawless)
+
   return flawless ? (
     <>
       <p className="result">🥳 Parabéns!</p>

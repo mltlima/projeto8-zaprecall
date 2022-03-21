@@ -35,7 +35,6 @@ function Question(props) {
 function Card(props) {
     const {question, answer, dataToPass, setHideCard, counter, updateCounter, addColorArr, colorArr, notAnswered} = props;
     const [showQuestion, setShowQuestion] = React.useState(true);
-    const [hideAnswer, setHideAnswer] = React.useState(false);
 
     return (
         <>
@@ -45,7 +44,7 @@ function Card(props) {
                     <ion-icon name="repeat-outline"></ion-icon>
                 </div>
             : 
-            <div className={hideAnswer ? "hide" : "card-answer"}>
+            <div className="card-answer">
                 <p>{answer}</p>
                 <div className="buttons">
 
